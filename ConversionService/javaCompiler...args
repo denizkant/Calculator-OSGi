@@ -1,0 +1,2 @@
+#ADAPTER#ACCESS#.p2/pool/plugins/org.eclipse.osgi_3.19.0.v20240213-1246.jar[+org/osgi/framework/*;?**/*]
+#ADAPTER#ACCESS#.p2/pool/plugins/org.eclipse.osgi.compatibility.state_1.2.1000.v20240213-1057.jar[+org/osgi/framework/*;?**/*]
