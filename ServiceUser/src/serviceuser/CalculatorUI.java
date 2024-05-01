@@ -158,6 +158,10 @@ public class CalculatorUI extends JFrame implements ActionListener {
             int n1 = conversionService.textToNumber(num1); 
             int n2 = conversionService.textToNumber(num2);
             
+            if (e.getSource() == divideButton && n2 == 0) {
+                throw new ArithmeticException(messages.getString("zeroErrorMessage"));
+            }
+            
             if (e.getSource() == addButton) {
             	
                 result = calculator.add(n1, n2);
@@ -171,7 +175,9 @@ public class CalculatorUI extends JFrame implements ActionListener {
 
             resultField.setText(conversionService.numberToText(result));
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid input! Please enter valid numbers.");
+            JOptionPane.showMessageDialog(this, messages.getString("errorMessage"));
+        } catch (ArithmeticException ex) {
+            JOptionPane.showMessageDialog(this, messages.getString("errorLabel") + ex.getMessage());
         }
     }
 }

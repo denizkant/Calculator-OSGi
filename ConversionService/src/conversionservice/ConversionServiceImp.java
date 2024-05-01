@@ -1,21 +1,19 @@
 package conversionservice;
 
 import java.text.DecimalFormat;
-import java.util.ResourceBundle;
 
 public class ConversionServiceImp implements ConversionService{
-	private ResourceBundle messages;
 
     private final String[] numberWords = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
     private final String[] tensWords = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
     private final String[] magnitudeWords = {"", "bin", "milyon", "milyar", "trilyon", "katrilyon", "kentilyon", "seksilyon", "septilyon", "oktilyon", "nonilyon", "desilyon"};
 
-    private static final String[] tensWordsEnglish = { ""," ten"," twenty"," thirty"," forty"," fifty"," sixty"," seventy"," eighty"," ninety"};
-    
+    private final String[] tensWordsEnglish = { ""," ten"," twenty"," thirty"," forty"," fifty"," sixty"," seventy"," eighty"," ninety"};    
     private final String[] numberWordsEnglish = {""," one", " two","three", "four", "five",  "six", "seven","eight", "nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen", "eighteen","nineteen"};
     private final String[] magnitudeWordsEnglish = {"", "thousand", "million", "billion", "trillion"};
     
     private Language language = Language.Turkish;
+    
     
     public void setLanguage(Language language) 
     {
@@ -39,45 +37,46 @@ public class ConversionServiceImp implements ConversionService{
         int number = 0;
         long currentNumber = 0;
         long currentMagnitude = 1;
-        long previousNumber = 0; 
-        long previousMagnitude = 0; 
         for (String part : parts) {
+            boolean found = false;
             for (int i = 0; i < numberWords.length; i++) {
                 if (part.equals(numberWords[i])) {
                     currentNumber += i;
+                    found = true;
                     break;
                 }
             }
-            for (int i = 0; i < tensWords.length; i++) {
-                if (part.equals(tensWords[i])) {
-                    currentNumber *= 10;
-                    currentNumber += (i * 10);
-                    break;
-                }
-            }
-            if (part.equals("yüz")) {
-                if(currentNumber == 0) {
-                    currentNumber = 1;
-                }
-                currentNumber *= 100;
-            }
-            for (int i = 0; i < magnitudeWords.length; i++) {
-                if (part.equals(magnitudeWords[i])) {
-                    if (i == 1) {
-                        currentMagnitude *= 1000;
-                        currentNumber = 1;
+            if (!found) {
+                for (int i = 0; i < tensWords.length; i++) {
+                    if (part.equals(tensWords[i])) {
+                        currentNumber += i * 10;
+                        found = true;
+                        break;
                     }
                 }
             }
-            if (currentNumber > 0) {
-                number += previousNumber * previousMagnitude;
-                previousNumber = currentNumber;
-                previousMagnitude = currentMagnitude;
+            if (!found && part.equals("yüz")) {
+                currentNumber = (currentNumber == 0 ? 1 : currentNumber) * 100;
+                found = true;
+            }
+            if (!found) {
+                for (int i = 0; i < magnitudeWords.length; i++) {
+                    if (part.equals(magnitudeWords[i])) {
+                        currentMagnitude = (long) Math.pow(10, i * 3);
+                        if (currentNumber == 0) {
+                            currentNumber = 1;
+                        }
+                        break;
+                    }
+                }
+            }
+            if (currentNumber > 0 && currentMagnitude > 1) {
+                number += currentNumber * currentMagnitude;
                 currentNumber = 0;
                 currentMagnitude = 1;
             }
         }
-        number += previousNumber * previousMagnitude;
+        number += currentNumber * currentMagnitude;
         return number;
     }
     
@@ -87,45 +86,46 @@ public class ConversionServiceImp implements ConversionService{
         int number = 0;
         long currentNumber = 0;
         long currentMagnitude = 1;
-        long previousNumber = 0; 
-        long previousMagnitude = 0; 
         for (String part : parts) {
+            boolean found = false;
             for (int i = 0; i < numberWordsEnglish.length; i++) {
                 if (part.equals(numberWordsEnglish[i])) {
                     currentNumber += i;
+                    found = true;
                     break;
                 }
             }
-            for (int i = 0; i < tensWordsEnglish.length; i++) {
-                if (part.equals(tensWordsEnglish[i])) {
-                    currentNumber *= 10;
-                    currentNumber += (i * 10);
-                    break;
-                }
-            }
-            if (part.equals("hundred")) {
-                if(currentNumber == 0) {
-                    currentNumber = 1;
-                }
-                currentNumber *= 100;
-            }
-            for (int i = 0; i < magnitudeWordsEnglish.length; i++) {
-                if (part.equals(magnitudeWordsEnglish[i])) {
-                    if (i == 1) {
-                        currentMagnitude *= 1000;
-                        currentNumber = 1;
+            if (!found) {
+                for (int i = 0; i < tensWordsEnglish.length; i++) {
+                    if (part.equals(tensWordsEnglish[i])) {
+                        currentNumber += i * 10;
+                        found = true;
+                        break;
                     }
                 }
             }
-            if (currentNumber > 0) {
-                number += previousNumber * previousMagnitude;
-                previousNumber = currentNumber;
-                previousMagnitude = currentMagnitude;
+            if (!found && part.equals("hundred")) {
+                currentNumber = (currentNumber == 0 ? 1 : currentNumber) * 100;
+                found = true;
+            }
+            if (!found) {
+                for (int i = 0; i < magnitudeWordsEnglish.length; i++) {
+                    if (part.equals(magnitudeWordsEnglish[i])) {
+                        currentMagnitude = (long) Math.pow(10, i * 3);
+                        if (currentNumber == 0) {
+                            currentNumber = 1;
+                        }
+                        break;
+                    }
+                }
+            }
+            if (currentNumber > 0 && currentMagnitude > 1) {
+                number += currentNumber * currentMagnitude;
                 currentNumber = 0;
                 currentMagnitude = 1;
             }
         }
-        number += previousNumber * previousMagnitude;
+        number += currentNumber * currentMagnitude;
         return number;
     }
     
@@ -240,7 +240,7 @@ public class ConversionServiceImp implements ConversionService{
     private String numberToTextEnglishImp(int number) 
     {
     	if(number == 0) {
-    		return "sıfır";
+    		return "zero";
     	}
     	
     	String snumber = Long.toString(number);
