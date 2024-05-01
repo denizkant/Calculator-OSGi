@@ -24,6 +24,8 @@ Sonuç kısmında işlem sonucu görüntülenecektir.
 Varsayılan olarak Türkçe dili kullanılır.
 İngilizce dilini etkinleştirmek için uygulama arayüzündeki "Dİl Seçin:" kısmından kullanmak istediğiniz dili seçebilirsiniz.
 
+![image](https://github.com/denizkant/Calculator---OSGI/assets/86944888/4ab13ea8-83dc-47d0-a3a0-091d56d7a8f7)
+
 # OSGi Nedir?
 OSGi (Open Services Gateway initiative), modüler ve bileşen tabanlı yazılım geliştirmeyi destekleyen bir standarttır. Bu uygulamada OSGi kullanılarak, yazılımın modüler ve esnek olması sağlanmıştır. Bu, yazılımı bağımsız bileşenlere ayırarak, geliştirme, dağıtım ve sürdürme süreçlerini kolaylaştırır.
 
