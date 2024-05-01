@@ -27,8 +27,8 @@ Varsayılan olarak Türkçe dili kullanılır.
 # OSGi Nedir?
 OSGi (Open Services Gateway initiative), modüler ve bileşen tabanlı yazılım geliştirmeyi destekleyen bir standarttır. Bu uygulamada OSGi kullanılarak, yazılımın modüler ve esnek olması sağlanmıştır. Bu, yazılımı bağımsız bileşenlere ayırarak, geliştirme, dağıtım ve sürdürme süreçlerini kolaylaştırır.
 
-# Localization
+# Lokalizasyon(Localization)
 Uygulamanın dil desteği için ResourceBundle sınıfı kullanılmıştır. Bu sınıf, çeşitli dil ve ülke ayarlarına göre metinleri yerelleştirmek için kullanılır. Projede, dil dosyaları içeren bir kaynak klasörü bulunur. Uygulama, kullanıcının tercih ettiği dile göre doğru dil dosyasını yükler ve metinleri yerelleştirir.
 
-# Launch Configuration
+# Yapılandırmayı Başlatmak(Launch Configuration)
 Uygulamayı Eclipse IDE üzerinde çalıştırmak için öncelikle bir Launch Configuration ayarlaması yapmanız gerekmektedir. Bunun için, Eclipse IDE'de projenizin bulunduğu dizinde sağ tıklayarak bir bağlam menüsü açın. Ardından "Run As" veya "Debug As" seçeneğine gelin ve buradan "Run Configurations" veya "Debug Configurations" seçeneğini tıklayın. Karşınıza çıkacak pencerede "OSGi Framework" veya "OSGi Framework Application" adında yeni bir yapılandırma oluşturun. Projenizi seçin ve başlangıç noktası olarak OSGi Framework'un başlatılmasını sağlayacak olan sınıfı belirtin. Ayarlarınızı tamamladıktan sonra "Apply" veya "Run" düğmesine tıklayarak uygulamanızı çalıştırabilirsiniz.
