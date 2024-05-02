@@ -1,8 +1,6 @@
 // CalculatorUI.java
 package serviceuser;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,13 +32,10 @@ public class CalculatorUI extends JFrame implements ActionListener {
     private ResourceBundle messages;
     
 
-    /**
-     * Create the frame.
-     */
     public CalculatorUI(ConversionService service) {
     	messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
         setAlwaysOnTop(true);
-        setTitle("Four Operations Calculator");
+        setTitle("Dört İşlem Hesap Makinesi");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 300);
         setSize(400, 300);
@@ -52,17 +47,14 @@ public class CalculatorUI extends JFrame implements ActionListener {
         conversionService = service;
         calculator = new CalculatorImp();
 
-        // First number input field
         add(new JLabel(messages.getString("number1Label")));
         firstNumberField = new JTextField();
         add(firstNumberField);
 
-        // Second number input field
         add(new JLabel(messages.getString("number2Label")));
         secondNumberField = new JTextField();
         add(secondNumberField);
 
-        
         add(new JLabel(messages.getString("resultLabel")));
         resultField = new JTextField();
         resultField.setEditable(false);
@@ -118,6 +110,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
             selectLanguageCombo.addItem("English");
             selectLanguageCombo.addItem("Türkçe");
             conversionService.setLanguage(Language.English);
+            setTitle("Four Operations Calculator");
         }
 
         JLabel number1Label = (JLabel) getContentPane().getComponent(0);
@@ -144,8 +137,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
         JLabel languageLabel = (JLabel) getContentPane().getComponent(10);
         languageLabel.setText(messages.getString("languageLabel"));
         
-        JOptionPane zeroErrorMessage = (JOptionPane) getContentPane().getComponent(DISPOSE_ON_CLOSE);
-        zeroErrorMessage.setToolTipText(messages.getString("zeroErrorMessage"));
+
 
     }
 
@@ -159,25 +151,23 @@ public class CalculatorUI extends JFrame implements ActionListener {
             int n2 = conversionService.textToNumber(num2);
             
             if (e.getSource() == divideButton && n2 == 0) {
-                throw new ArithmeticException(messages.getString("zeroErrorMessage"));
+                resultField.setText(messages.getString("divisionByZeroError"));
+                return;
             }
             
-            if (e.getSource() == addButton) {
-            	
+            if (e.getSource() == addButton) {            	
                 result = calculator.add(n1, n2);
             } else if (e.getSource() == subtractButton) {
                 result = calculator.subtract(n1, n2);
             } else if (e.getSource() == multiplyButton) {
                 result = calculator.multiply(n1, n2);
             } else if (e.getSource() == divideButton) {
-                result = calculator.divide(n1, n2);
+                result = calculator.divide(n1, n2);        	
             }
 
             resultField.setText(conversionService.numberToText(result));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, messages.getString("errorMessage"));
-        } catch (ArithmeticException ex) {
-            JOptionPane.showMessageDialog(this, messages.getString("errorLabel") + ex.getMessage());
-        }
+        } 
     }
 }

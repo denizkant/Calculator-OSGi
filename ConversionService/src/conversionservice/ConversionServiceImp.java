@@ -20,7 +20,7 @@ public class ConversionServiceImp implements ConversionService{
     	this.language = language;
     }
     
-  //  @Override
+      @Override
     public int textToNumber(String text) {
         if(language == Language.Turkish) 
         {
@@ -150,20 +150,21 @@ public class ConversionServiceImp implements ConversionService{
     	
     	String snumber = Long.toString(number);
 
-        // pad with "0"
+      
         String mask = "000000000000";
-        DecimalFormat df = new DecimalFormat(mask);
-        snumber = df.format(number);
+        DecimalFormat decimalformat = new DecimalFormat(mask);
+        snumber = decimalformat.format(number);
 
-        // XXXnnnnnnnnn
+        
         int billions = Integer.parseInt(snumber.substring(0,3));
-        // nnnXXXnnnnnn
+        
         int millions  = Integer.parseInt(snumber.substring(3,6));
-        // nnnnnnXXXnnn
+        
         int hundredThousands = Integer.parseInt(snumber.substring(6,9));
-        // nnnnnnnnnXXX
+        
         int thousands = Integer.parseInt(snumber.substring(9,12));
 
+        
         String tradBillions;
         switch (billions) {
         case 0:
@@ -179,6 +180,7 @@ public class ConversionServiceImp implements ConversionService{
         }
         String result =  tradBillions;
 
+        
         String tradMillions;
         switch (millions) {
         case 0:
@@ -194,6 +196,7 @@ public class ConversionServiceImp implements ConversionService{
         }
         result =  result + tradMillions;
 
+        
         String tradHundredThousands;
         switch (hundredThousands) {
         case 0:
@@ -212,30 +215,31 @@ public class ConversionServiceImp implements ConversionService{
         tradThousand = convertLessThanOneThousandTurkish(thousands);
         result =  result + tradThousand;
 
-        // remove extra spaces!
         return result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
     }
     
+    
     private String convertLessThanOneThousandTurkish(int number) {
-        String soFar;
+        String tempResult;
 
         if (number % 100 < 10){
-          soFar = numberWords[number % 100];
+          tempResult = numberWords[number % 100];
           number /= 100;
         }
         else {
-          soFar = numberWords[number % 10];
+          tempResult = numberWords[number % 10];
           number /= 10;
 
-          soFar = tensWords[number % 10] + " " + soFar;
+          tempResult = tensWords[number % 10] + " " + tempResult;
           number /= 10;
         }
-        if (number == 0) return soFar;
+        if (number == 0) return tempResult;
         if(number == 1){
-        	 return "yüz " + soFar;
+        	 return "yüz " + tempResult;
         }
-        return numberWords[number] + " yüz " + soFar;
+        return numberWords[number] + " yüz " + tempResult;
       } 
+    
     
     private String numberToTextEnglishImp(int number) 
     {
@@ -245,19 +249,18 @@ public class ConversionServiceImp implements ConversionService{
     	
     	String snumber = Long.toString(number);
 
-        // pad with "0"
         String mask = "000000000000";
         DecimalFormat df = new DecimalFormat(mask);
         snumber = df.format(number);
 
-        // XXXnnnnnnnnn
         int billions = Integer.parseInt(snumber.substring(0,3));
-        // nnnXXXnnnnnn
+
         int millions  = Integer.parseInt(snumber.substring(3,6));
-        // nnnnnnXXXnnn
+    
         int hundredThousands = Integer.parseInt(snumber.substring(6,9));
-        // nnnnnnnnnXXX
+      
         int thousands = Integer.parseInt(snumber.substring(9,12));
+        
 
         String tradBillions;
         switch (billions) {
@@ -274,6 +277,7 @@ public class ConversionServiceImp implements ConversionService{
         }
         String result =  tradBillions;
 
+        
         String tradMillions;
         switch (millions) {
         case 0:
@@ -289,6 +293,7 @@ public class ConversionServiceImp implements ConversionService{
         }
         result =  result + tradMillions;
 
+        
         String tradHundredThousands;
         switch (hundredThousands) {
         case 0:
@@ -307,26 +312,26 @@ public class ConversionServiceImp implements ConversionService{
         tradThousand = convertLessThanOneThousandEnglish(thousands);
         result =  result + tradThousand;
 
-        // remove extra spaces!
         return result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
     }
     
+    
     private String convertLessThanOneThousandEnglish(int number) {
-        String soFar;
+        String tempResult;
 
         if (number % 100 < 20){
-          soFar = numberWordsEnglish[number % 100];
+          tempResult = numberWordsEnglish[number % 100];
           number /= 100;
         }
         else {
-          soFar = numberWordsEnglish[number % 10];
+          tempResult = numberWordsEnglish[number % 10];
           number /= 10;
 
-          soFar = tensWordsEnglish[number % 10] + " " + soFar;
+          tempResult = tensWordsEnglish[number % 10] + " " + tempResult;
           number /= 10;
         }
-        if (number == 0) return soFar;
-        return numberWordsEnglish[number] + " hundred " + soFar;
+        if (number == 0) return tempResult;
+        return numberWordsEnglish[number] + " hundred " + tempResult;
       } 
     
     
