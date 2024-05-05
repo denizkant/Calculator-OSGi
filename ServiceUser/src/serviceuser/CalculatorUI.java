@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 //CalculatorUI.java
 package serviceuser;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+=======
+// CalculatorUI.java
+package serviceuser;
+
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +24,10 @@ import conversionservice.Language;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.math.BigInteger;
+=======
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -33,11 +42,20 @@ public class CalculatorUI extends JFrame implements ActionListener {
     private Calculator calculator;
     private JComboBox<String> selectLanguageCombo;
     private ResourceBundle messages;
+<<<<<<< HEAD
    
     public CalculatorUI(ConversionService service) {
     	messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
         setAlwaysOnTop(true);
         setTitle("Four Operations Calculator");
+=======
+    
+
+    public CalculatorUI(ConversionService service) {
+    	messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
+        setAlwaysOnTop(true);
+        setTitle("Dört İşlem Hesap Makinesi");
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 300);
         setSize(400, 300);
@@ -49,17 +67,26 @@ public class CalculatorUI extends JFrame implements ActionListener {
         conversionService = service;
         calculator = new CalculatorImp();
 
+<<<<<<< HEAD
         // First number input field
+=======
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
         add(new JLabel(messages.getString("number1Label")));
         firstNumberField = new JTextField();
         add(firstNumberField);
 
+<<<<<<< HEAD
         // Second number input field
+=======
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
         add(new JLabel(messages.getString("number2Label")));
         secondNumberField = new JTextField();
         add(secondNumberField);
 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
         add(new JLabel(messages.getString("resultLabel")));
         resultField = new JTextField();
         resultField.setEditable(false);
@@ -115,6 +142,10 @@ public class CalculatorUI extends JFrame implements ActionListener {
             selectLanguageCombo.addItem("English");
             selectLanguageCombo.addItem("Türkçe");
             conversionService.setLanguage(Language.English);
+<<<<<<< HEAD
+=======
+            setTitle("Four Operations Calculator");
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
         }
 
         JLabel number1Label = (JLabel) getContentPane().getComponent(0);
@@ -141,8 +172,12 @@ public class CalculatorUI extends JFrame implements ActionListener {
         JLabel languageLabel = (JLabel) getContentPane().getComponent(10);
         languageLabel.setText(messages.getString("languageLabel"));
         
+<<<<<<< HEAD
         JOptionPane zeroErrorMessage = (JOptionPane) getContentPane().getComponent(DISPOSE_ON_CLOSE);
         zeroErrorMessage.setToolTipText(messages.getString("zeroErrorMessage"));
+=======
+
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
 
     }
 
@@ -150,6 +185,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
         try {
             String num1 = firstNumberField.getText();
             String num2 = secondNumberField.getText();
+<<<<<<< HEAD
             BigInteger result = BigInteger.ZERO;
             
             BigInteger n1 = conversionService.textToNumber(num1); 
@@ -164,11 +200,26 @@ public class CalculatorUI extends JFrame implements ActionListener {
             if (e.getSource() == addButton) {        	
                 result = calculator.add(n1, n2);
                 System.out.println(result);
+=======
+            int result = 0;
+            
+            int n1 = conversionService.textToNumber(num1); 
+            int n2 = conversionService.textToNumber(num2);
+            
+            if (e.getSource() == divideButton && n2 == 0) {
+                resultField.setText(messages.getString("divisionByZeroError"));
+                return;
+            }
+            
+            if (e.getSource() == addButton) {            	
+                result = calculator.add(n1, n2);
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
             } else if (e.getSource() == subtractButton) {
                 result = calculator.subtract(n1, n2);
             } else if (e.getSource() == multiplyButton) {
                 result = calculator.multiply(n1, n2);
             } else if (e.getSource() == divideButton) {
+<<<<<<< HEAD
                 result = calculator.divide(n1, n2);
             }
             System.out.println(result);
@@ -177,5 +228,14 @@ public class CalculatorUI extends JFrame implements ActionListener {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,messages.getString("errorMessage"));
         }
+=======
+                result = calculator.divide(n1, n2);        	
+            }
+
+            resultField.setText(conversionService.numberToText(result));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, messages.getString("errorMessage"));
+        } 
+>>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
     }
 }
