@@ -1,6 +1,5 @@
 package serviceuser;
 
-<<<<<<< HEAD
 import java.math.BigInteger;
 
 public class CalculatorImp implements Calculator {
@@ -29,28 +28,6 @@ public class CalculatorImp implements Calculator {
         }
         return num1.divide(num2);
 	}
-=======
 
-public class CalculatorImp implements Calculator {
-
-
-	
-	
-    public int add(int num1, int num2) {
-    	return num1 + num2;
-    }
-
-    public int subtract(int num1, int num2) {
-    	return num1 - num2;
-    }
-
-    public int multiply(int num1, int num2) {
-    	return num1 * num2;
-    }
-
-    public int divide(int num1, int num2) {
-    	return num1 / num2;
-    }
->>>>>>> 3a5ac9e4f6619d7532ee7b8419bdaced2c4e27a5
 
 }
