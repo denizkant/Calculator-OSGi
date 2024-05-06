@@ -19,6 +19,7 @@ Projeyi çalıştırın.
 Uygulama başladığında, kullanıcı arayüzü belirecektir.
 İki sayıyı girin ve işlem türünü seçin (toplama, çıkarma, çarpma veya bölme).
 Sonuç kısmında işlem sonucu görüntülenecektir.
+Büyük sayılar girildiğinde sonuç kısmında sayıyı tam görmek için UI büyültülebilir.
 
 ## Dil Değiştirme
 Varsayılan olarak Türkçe dili kullanılır.
