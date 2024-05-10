@@ -8,3 +8,4 @@ Automatic-Module-Name: ServiceUser
 Import-Package: conversionservice,
  org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
+Export-Package: serviceuser

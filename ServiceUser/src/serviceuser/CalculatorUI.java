@@ -34,7 +34,6 @@ public class CalculatorUI extends JFrame implements ActionListener {
     private JButton addButton, subtractButton, multiplyButton, divideButton;
     private ConversionService conversionService;
     private Calculator calculator;
-    private JComboBox<String> selectLanguageCombo;
     private ResourceBundle messages;
 
    
@@ -42,17 +41,18 @@ public class CalculatorUI extends JFrame implements ActionListener {
     
 
     public CalculatorUI(ConversionService service) {
-    	messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
+    	Locale locale = Locale.getDefault(); 
+        messages = ResourceBundle.getBundle("messages", locale);        
         setAlwaysOnTop(true);
         setTitle("Dört İşlem Hesap Makinesi");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, 300);
-        setSize(400, 300);
+        setBounds(100, 100, 400, 200);
+        setSize(800, 400);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
-        contentPane.setLayout(new GridLayout(6, 2));
+        contentPane.setLayout(new GridLayout(5, 2));
 
         conversionService = service;
         calculator = new CalculatorImp();
@@ -88,71 +88,11 @@ public class CalculatorUI extends JFrame implements ActionListener {
         add(subtractButton);
         add(multiplyButton);
         add(divideButton);
-
-        
-        selectLanguageCombo = new JComboBox<>(new String[]{"Türkçe", "English"});
-        selectLanguageCombo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String language = (String) selectLanguageCombo.getSelectedItem();
-                if (language.equals("Türkçe")) {
-                    messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
-                } else {
-                    messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("en").build());
-                }
-                changeLanguage();
-            }
-        });
-        add(new JLabel(messages.getString("languageLabel")));
-        add(selectLanguageCombo);
-        
+ 
         setVisible(true);
     }
     
-    private void changeLanguage() {
-        String language = (String) selectLanguageCombo.getSelectedItem();
-        
-        if (language.equals("Türkçe")) {
-            messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("tr").build());
-            selectLanguageCombo.removeAllItems();
-            selectLanguageCombo.addItem("Türkçe");
-            selectLanguageCombo.addItem("English");
-            conversionService.setLanguage(Language.Turkish);
-        } else {
-            messages = ResourceBundle.getBundle("messages", new Locale.Builder().setLanguage("en").build());
-            selectLanguageCombo.removeAllItems();
-            selectLanguageCombo.addItem("English");
-            selectLanguageCombo.addItem("Türkçe");
-            conversionService.setLanguage(Language.English);
-
-        }
-
-        JLabel number1Label = (JLabel) getContentPane().getComponent(0);
-        number1Label.setText(messages.getString("number1Label"));
-        
-        JLabel number2Label = (JLabel) getContentPane().getComponent(2);
-        number2Label.setText(messages.getString("number2Label"));
-        
-        JLabel resultLabel = (JLabel) getContentPane().getComponent(4);
-        resultLabel.setText(messages.getString("resultLabel"));
-        
-        JButton addButtonLabel = (JButton) getContentPane().getComponent(6);
-        addButtonLabel.setText(messages.getString("addButtonLabel"));
-        
-        JButton subtractButtonLabel = (JButton) getContentPane().getComponent(7);
-        subtractButtonLabel.setText(messages.getString("subtractButtonLabel"));
-        
-        JButton multiplyButtonLabel = (JButton) getContentPane().getComponent(8);
-        multiplyButtonLabel.setText(messages.getString("multiplyButtonLabel"));
-        
-        JButton divideButtonLabel = (JButton) getContentPane().getComponent(9);
-        divideButtonLabel.setText(messages.getString("divideButtonLabel"));
-                
-        JLabel languageLabel = (JLabel) getContentPane().getComponent(10);
-        languageLabel.setText(messages.getString("languageLabel"));
-        
-
-
-    }
+ 
 
     public void actionPerformed(ActionEvent e) {
         try {
@@ -179,7 +119,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
             } else if (e.getSource() == multiplyButton) {
                 result = calculator.multiply(n1, n2);
             } else if (e.getSource() == divideButton) {
-       result = calculator.divide(n1, n2);        	
+            	result = calculator.divide(n1, n2);        	
             }
 
             resultField.setText(conversionService.numberToText(result));
