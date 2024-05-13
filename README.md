@@ -1,10 +1,9 @@
 # Dört İşlem Hesap Makinesi(OSGi)
 Bu uygulama, kullanıcılara girdikleri iki sayıyla dört işlem yapmalarını sağlar ve sonucu gösterir.
 
-![image](https://github.com/denizkant/Calculator---OSGI/assets/86944888/e2fadf6c-50ff-4d27-b760-1e446d9b2be5)
 
 ## Özellikler
-- Uygulama Türkçe ve İngilizce dil desteği sunar.
+- Uygulama Türkçe ve İngilizce dil desteği sunar. Bilgisayarın dili ne ise ona göre çalışır.
 - Varsayılan dil Türkçe'dir, ancak etkin "locale" ayarına göre İngilizce olarak da çalışabilir.
 - İki OSGi servisiyle yapılandırılmıştır.
 - Birinci servis, metin tabanlı sayıları dönüştürmekle sorumludur.
@@ -21,11 +20,11 @@ Uygulama başladığında, kullanıcı arayüzü belirecektir.
 Sonuç kısmında işlem sonucu görüntülenecektir.
 Büyük sayılar girildiğinde sonuç kısmında sayıyı tam görmek için UI büyültülebilir.
 
+
 ## Dil Değiştirme
 Varsayılan olarak Türkçe dili kullanılır.
-İngilizce dilini etkinleştirmek için uygulama arayüzündeki "Dİl Seçin:" kısmından kullanmak istediğiniz dili seçebilirsiniz.
+Eğer bilgisayarınızın dili İngilizce ise uygulama dili İngilizce olarak değişecektir ve girdileri de İngilizce olarak yazmanız gerekecektir. Eğer Türkçe girmeye çalışırsanız uygulama uyarı verecektir.
 
-![image](https://github.com/denizkant/Calculator---OSGI/assets/86944888/4ab13ea8-83dc-47d0-a3a0-091d56d7a8f7)
 
 ## OSGi Nedir?
 OSGi (Open Services Gateway initiative), modüler ve bileşen tabanlı yazılım geliştirmeyi destekleyen bir standarttır. Bu uygulamada OSGi kullanılarak, yazılımın modüler ve esnek olması sağlanmıştır. Bu, yazılımı bağımsız bileşenlere ayırarak, geliştirme, dağıtım ve sürdürme süreçlerini kolaylaştırır.
