@@ -99,17 +99,17 @@ public class ConversionServiceImp implements ConversionService{
                 BigInteger number = new BigInteger(text);
                 if (number.compareTo(BigInteger.ZERO) < 0 || number.compareTo(MAX_SUPPORTED_NUMBER) > 0) {
                 	if(language == Language.Turkish) {
-                		JOptionPane.showMessageDialog(null, "Girilen sayı aralık dışında. Lütfen bir sayı girin." );
+                		JOptionPane.showMessageDialog(null, "Girilen sayı aralık dışında. Lütfen 0 ile arasında bir sayı girin." );
                 	}else {
-                    JOptionPane.showMessageDialog(null, "Input number is out of range. Please enter a number." );
+                    JOptionPane.showMessageDialog(null, "Input number is out of range. Please enter a number between 0 and " );
                 	}
                 }
                 return null;
             } catch (NumberFormatException ex) {
             	if(language == Language.Turkish) {
-            		 JOptionPane.showMessageDialog(null, "Girdiğiniz sayıların harflerle girilmesi ve aynı dilde olması gerekmektedir. \n Örnek: \"six\"-\"seventeen\" veya \"altı\"-\"on yedi\"");
+            		 JOptionPane.showMessageDialog(null, "Girdiğiniz sayıların harflerle girilmesi ve aynı dilde olması gerekmektedir. \\ Örnek: \"six\"-\"six\" veya \"yedi\"-\"yedi\"");
             	}else {
-                JOptionPane.showMessageDialog(null, "The numbers you enter must be entered in letters and must be in the same language. \n Example: \\\"six\\\"-\\\"seventeen\\\" veya \\\"altı\\\"-\\\"on yedi\\\"");
+                JOptionPane.showMessageDialog(null, "The numbers you enter must be entered in letters and must be in the same language. \\ Example: \"yedi\"-\"yedi\" or \"six\"-\"six\"");
             	}
                 return null;
             }
@@ -195,7 +195,7 @@ public class ConversionServiceImp implements ConversionService{
           ENGLISH_NUMBER_MAP.put(BigInteger.valueOf(80), "eighty");
           ENGLISH_NUMBER_MAP.put(BigInteger.valueOf(90), "ninety");
 
-       // Turkish numbers
+          // Turkish numbers
           TURKISH_NUMBER_MAP.put(BigInteger.ZERO, "sıfır");
           TURKISH_NUMBER_MAP.put(BigInteger.ONE, "bir");
           TURKISH_NUMBER_MAP.put(BigInteger.valueOf(2), "iki");
@@ -224,7 +224,6 @@ public class ConversionServiceImp implements ConversionService{
           TURKISH_NUMBER_MAP.put(BigInteger.valueOf(70), "yetmiş");
           TURKISH_NUMBER_MAP.put(BigInteger.valueOf(80), "seksen");
           TURKISH_NUMBER_MAP.put(BigInteger.valueOf(90), "doksan");
-
       }
       
     public String numberToText(BigInteger number) 
