@@ -24,6 +24,14 @@ Büyük sayılar girildiğinde sonuç kısmında sayıyı tam görmek için UI b
 ## Dil Değiştirme
 Varsayılan olarak Türkçe dili kullanılır.
 Eğer bilgisayarınızın dili İngilizce ise uygulama dili İngilizce olarak değişecektir ve girdileri de İngilizce olarak yazmanız gerekecektir. Eğer Türkçe girmeye çalışırsanız uygulama uyarı verecektir.
+![image](https://github.com/denizkant/Calculator-OSGi/assets/86944888/6a2cb6ae-501d-42ad-abeb-fd028cded8a2)
+![image](https://github.com/denizkant/Calculator-OSGi/assets/86944888/7c11d038-94cf-4c1e-a203-b009306093ff)
+
+Yapılan girişlerde farklı dil olması veya yazım yanlışı olması durumunda o dile göre hata mesajı görebilirsiniz.
+![image](https://github.com/denizkant/Calculator-OSGi/assets/86944888/58e8e420-3a2c-4acc-a250-b97bd68f1958)
+![image](https://github.com/denizkant/Calculator-OSGi/assets/86944888/a365a1af-e55d-4beb-9aa4-69f077595aa6)
+
+
 
 
 ## OSGi Nedir?
