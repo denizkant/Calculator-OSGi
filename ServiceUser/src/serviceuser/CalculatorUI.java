@@ -5,7 +5,6 @@ package serviceuser;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,10 +40,21 @@ public class CalculatorUI extends JFrame implements ActionListener {
     
 
     public CalculatorUI(ConversionService service) {
-    	Locale locale = Locale.getDefault(); 
+    	Locale locale = Locale.getDefault();
         messages = ResourceBundle.getBundle("messages", locale);        
         setAlwaysOnTop(true);
         setTitle("Dört İşlem Hesap Makinesi");
+        
+        conversionService = service;
+        calculator = new CalculatorImp();
+        
+        if(locale.getLanguage().equals("tr")) 
+        {
+            conversionService.setLanguage(Language.Turkish);
+        }else 
+        {
+            conversionService.setLanguage(Language.English);
+        }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 400, 200);
@@ -54,8 +64,7 @@ public class CalculatorUI extends JFrame implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(new GridLayout(5, 2));
 
-        conversionService = service;
-        calculator = new CalculatorImp();
+        
 
 
         add(new JLabel(messages.getString("number1Label")));
